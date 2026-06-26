@@ -41,7 +41,7 @@ buttons.forEach((button) => {
       first = 0;
       second = 0;
       operator = "";
-      answer.textContent = "";
+      answer.textContent = 0;
     }
   });
 });
