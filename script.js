@@ -1,8 +1,8 @@
 const buttons = [...document.querySelectorAll("button")];
-const answer = document.querySelector(".result");
-let first = 0;
+let answer = document.querySelector(".result");
+let first = "";
 let operator = "";
-let second = 0;
+let second = "";
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -11,29 +11,38 @@ buttons.forEach((button) => {
     if (
       button.classList.contains("number") &&
       operator === "" &&
-      second === 0
+      second === ""
     ) {
-      const num = convertToNum(button.textContent);
-      first = num;
-      answer.textContent = num;
+      first += button.textContent;
+      answer.textContent = "";
+      answer.textContent = first;
     }
     //operator
     if (button.classList.contains("operator")) {
       operator = button.textContent;
     }
     //2nd number
-    if (button.classList.contains("number") && operator !== "" && first !== 0) {
+    if (
+      button.classList.contains("number") &&
+      operator !== "" &&
+      first !== ""
+    ) {
       const num = convertToNum(button.textContent);
-      second = num;
-      answer.textContent = num;
+      second += button.textContent;
+      answer.textContent = "";
+      answer.textContent = second;
     }
     //solve problem
     if (button.classList.contains("equal")) {
-      const result = operate(first, second, operator);
-      answer.textContent = result;
+      const result = operate(
+        Number.parseInt(first, 10),
+        Number.parseInt(second, 10),
+        operator,
+      );
+      answer.textContent = result.toString();
 
       first = result;
-      second = 0;
+      second = "";
       operator = "";
     }
 
